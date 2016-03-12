@@ -2,12 +2,17 @@
     <string name="app_name">KR Agent App</string>
 
     <!-- All Strings in MainActivity Module -->
-    <string name="drawer_open">Drawer Open</string>
-    <string name="drawer_close">Drawer Close</string>
 
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Close</string>
 
+    <!-- All strings used in Policy Fragment -->
     <string name="policy_fragment">Policy fragment</string>
+
+    <!-- All strings used in Commission Fragment -->
     <string name="commission_fragment">Commission fragment</string>
+
+    <!-- All strings used in settings Fragment -->
     <string name="settings_fragment">Settings fragment</string>
 
 

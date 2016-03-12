@@ -5,6 +5,7 @@
     tools:context="com.example.android.navigationdrawertraining.CommisionFragment">
 
     <TextView
+        android:id="@+id/tv_commission"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
