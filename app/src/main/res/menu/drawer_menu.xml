@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_policy"
+            android:icon="@drawable/ic_person_black"
+            android:title="Policy Details" />
+        <item
+            android:id="@+id/nav_commission"
+            android:icon="@drawable/ic_account_balance_wallet_black"
+            android:title="Commission Details" />
+
+        <item
+            android:id="@+id/nav_profit"
+            android:icon="@drawable/ic_monetization_on_black"
+            android:title="Profit Calc" />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Settings" />
+
+    </group>
+
+    <item android:title="Finance Tools">
+        <menu>
+            <item
+                android:id="@+id/nav_manage"
+                android:title="Money Saver Plan" />
+            <item
+                android:id="@+id/nav_share"
+                android:title="Security &amp; Growth" />
+            <item
+                android:id="@+id/nav_send"
+                android:title="Maha Life Gold" />
+        </menu>
+    </item>
+
+</menu>

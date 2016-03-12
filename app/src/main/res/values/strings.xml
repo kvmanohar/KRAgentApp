@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">KR Agent App</string>
+
+    <!-- All Strings in MainActivity Module -->
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
+
+    <string name="policy_fragment">Policy fragment</string>
+    <string name="commission_fragment">Commission fragment</string>
+    <string name="settings_fragment">Settings fragment</string>
+
+
+
+</resources>
