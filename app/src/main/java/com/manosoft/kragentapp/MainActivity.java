@@ -2,6 +2,7 @@ package com.manosoft.kragentapp;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,7 +16,13 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
+    android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
+
+    public static final String policyScreen = "policyScreen";
+    public static final String commissionScreen = "commissionScreen";
+    public static final String settingScreen = "settingsScreen";
+    String currentFragmentTag;
 
 
     @Override
@@ -39,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         //Initialise FragmentTransaction and set the first page to Policy page//
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.main_container, new PolicyFragment());
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.main_container, new PolicyFragment(),policyScreen);
         fragmentTransaction.commit();
+        currentFragmentTag=policyScreen;
         getSupportActionBar().setTitle(R.string.policy_fragment);
 
         //Set the Listener to NavigationView//
@@ -54,11 +63,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean _displaySelectedFragment(int viewID) {
 
         boolean fragmentDisplayedSuccessfully = false;
+        Fragment fragment;
 
         assert getSupportActionBar() != null;
         switch (viewID) {
             case R.id.nav_policy:
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.main_container, new PolicyFragment());
                 fragmentTransaction.commit();
                 getSupportActionBar().setTitle(R.string.policy_fragment);
@@ -66,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_commission:
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.main_container, new CommissionFragment());
                 fragmentTransaction.commit();
                 getSupportActionBar().setTitle(R.string.commission_fragment);
@@ -96,8 +106,9 @@ public class MainActivity extends AppCompatActivity {
     public NavigationView.OnNavigationItemSelectedListener navigationViewListener = new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
-
-            if (_displaySelectedFragment(item.getItemId())){
+            boolean result;
+            result = _displaySelectedFragment(item.getItemId());
+            if (result){
                 item.setChecked(true);
             }
             drawerLayout.closeDrawers();
