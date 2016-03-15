@@ -1,11 +1,13 @@
 package com.manosoft.kragentapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by VenkataManohar on 13/03/2016.
+ * Database helper class to do CRUD database operations on SQLite DB
  */
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -38,8 +40,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public final String CuT_customerStatus = "customerStatus";
 
     /**
-    * Column name of the Policy Table
-    */
+     * Column name of the Policy Table
+     */
     public final String PoT_id = "_id";
     public final String PoT_policyId = "policyId";
     public final String PoT_customerId = "customerId";
@@ -72,7 +74,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public final String CoT_commissionPending = "commissionPending";
     public final String CoT_recordLoggedDateTime = "recordLoggedDateTime";
 
-
     public SQLiteDatabase krDB;
 
 
@@ -83,12 +84,85 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        String SQLQuery = "CREATE TABLE " + CUSTOMER_TABLE +
+                " ( " +
+                CuT_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                CuT_customerId + " TEXT NOT NULL, " +
+                CuT_customerName + " TEXT NOT NULL, " +
+                CuT_hAddress + " TEXT NOT NULL, " +
+                CuT_hCity + " TEXT NOT NULL, " +
+                CuT_hPin + " TEXT NOT NULL, " +
+                CuT_hEmail + " TEXT NOT NULL, " +
+                CuT_hPhone + " TEXT NOT NULL, " +
+                CuT_hMobile + " TEXT NOT NULL, " +
+                CuT_bAddress + " TEXT NOT NULL, " +
+                CuT_bCity + " TEXT NOT NULL, " +
+                CuT_bEmail + " TEXT NOT NULL, " +
+                CuT_bPhone + " TEXT NOT NULL, " +
+                CuT_bMobile + " TEXT NOT NULL, " +
+                CuT_customerStatus + " TEXT NOT NULL " +
+                ")";
+        db.execSQL(SQLQuery);
+
+        SQLQuery = "CREATE TABLE " + POLICY_TABLE +
+                " (" +
+                PoT_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                PoT_policyId + " TEXT NOT NULL, " +
+                PoT_customerId + " TEXT NOT NULL, " +
+                PoT_policyHolder + " TEXT NOT NULL, " +
+                PoT_applicantName + " TEXT, " +
+                PoT_dateOfBirth + " TEXT NOT NULL, " +
+                PoT_age + " INTEGER NOT NULL, " +
+                PoT_gender + " TEXT NOT NULL, " +
+                PoT_policyDate + " TEXT NOT NULL, " +
+                PoT_policyScheme + " TEXT NOT NULL, " +
+                PoT_policyPeriod + " INTEGER NOT NULL, " +
+                PoT_modeOfPayment + " TEXT NOT NULL, " +
+                PoT_sumAssured + " REAL NOT NULL, " +
+                PoT_premiumAmount + " REAL NOT NULL, " +
+                PoT_maturityAmount + " REAL NOT NULL, " +
+                PoT_nomineeName + " TEXT NOT NULL, " +
+                PoT_comments + " TEXT, " +
+                PoT_policyStatus + " TEXT NOT NULL " +
+                ")";
+        db.execSQL(SQLQuery);
+
+        SQLQuery = "CREATE TABLE " + COMMISSION_TABLE +
+                " (" +
+                CoT_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                CoT_dateCommissionReceived + " TEXT NOT NULL, " +
+                CoT_commissionRate + " TEXT NOT NULL, " +
+                CoT_commissionEligible + " TEXT NOT NULL, " +
+                CoT_commissionReceived + " TEXT NOT NULL, " +
+                CoT_taxDeducted + " TEXT NOT NULL, " +
+                CoT_netCommission + " TEXT NOT NULL, " +
+                CoT_commissionPending + " TEXT NOT NULL, " +
+                CoT_recordLoggedDateTime + " TEXT NOT NULL " +
+                ")";
+        db.execSQL(SQLQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    public void OpenDB() {
+        krDB = getWritableDatabase();
+    }
+
+    public void CloseDB() {
+        if (krDB != null && krDB.isOpen()) {
+            krDB.close();
+        }
+    }
+
+    public Long insertTableRow(String tableName, ContentValues values){
+        return krDB.insert(tableName,null,values);
+    }
+
+
+
 
 
 }

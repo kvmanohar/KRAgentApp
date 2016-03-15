@@ -19,21 +19,24 @@ public class MainActivity extends AppCompatActivity {
     android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
 
+    public DBHelper dbHelper;
     public static final String policyScreen = "policyScreen";
     public static final String commissionScreen = "commissionScreen";
     public static final String settingScreen = "settingsScreen";
     String currentFragmentTag;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        _initialiseLayoutViewsOnCreate();
+
+        //Initialise Layouts and Database//
+        _initialiseLayoutViews();
+        _initialiseDatabase();
 
     }
 
-    public void _initialiseLayoutViewsOnCreate() {
+    public void _initialiseLayoutViews() {
 
         //Initialise toolbar to application action bar//
         toolbar = (Toolbar) findViewById(R.id.toolbar_actionBar);
@@ -60,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void _initialiseDatabase(){
+        dbHelper = new DBHelper(this);
+        dbHelper.OpenDB();
+    }
     public boolean _displaySelectedFragment(int viewID) {
 
         boolean fragmentDisplayedSuccessfully = false;
