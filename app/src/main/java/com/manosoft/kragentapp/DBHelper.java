@@ -2,6 +2,7 @@ package com.manosoft.kragentapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -16,9 +17,9 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
     /*Table name in the database*/
-    private static final String CUSTOMER_TABLE = "customerTbl";
-    private static final String POLICY_TABLE = "policyTbl";
-    private static final String COMMISSION_TABLE = "commissionTbl";
+    public final String CUSTOMER_TABLE = "customerTbl";
+    public final String POLICY_TABLE = "policyTbl";
+    public final String COMMISSION_TABLE = "commissionTbl";
 
     /**
      * Column name of the Customer Table
@@ -157,12 +158,18 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Long insertTableRow(String tableName, ContentValues values){
-        return krDB.insert(tableName,null,values);
+    public Long insertTableRow(String tableName, ContentValues values) {
+
+        return krDB.insert(tableName, null, values);
     }
 
+    public Cursor getAllRecords(String tableName){
 
-
+//        Cursor cursor = krDB.query(tableName,columns,null,null,null,null,null);
+        Cursor cursor = krDB.rawQuery("select * from " + tableName,null);
+        if (cursor != null) cursor.moveToFirst();
+        return cursor;
+    }
 
 
 }

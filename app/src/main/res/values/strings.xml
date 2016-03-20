@@ -15,6 +15,10 @@
     <!-- All strings used in settings Fragment -->
     <string name="settings_fragment">Settings fragment</string>
 
+    <!-- All strings used in Customer Fragment -->
+    <string name="customer_fragment">Customer Fragment</string>
+    <string name="search_label">Search</string>
+    <string name="search_hint">Search customer name</string>
 
 
 </resources>
